@@ -10,12 +10,12 @@ RUN echo "📦 Maven kurulum başlıyor..." && \
 
 # 1. quality-auth-client kurulumu
 RUN mvn install -DskipTests \
-    -f /app/quality-auth-client/pom.xml \
+    -f quality-auth-client/pom.xml \
     -Dmaven.multiModuleProjectDirectory=/app
 
 # 2. quality-test derlemesi
 RUN mvn package -DskipTests \
-    -f /app/quality-test/pom.xml \
+    -f quality-test/pom.xml \
     -Dmaven.multiModuleProjectDirectory=/app
 
 # 💥 Debug: target içeriğini kontrol et
