@@ -1,0 +1,6 @@
+[submodule "quality-auth-client"]
+	path = quality-auth-client
+	url = https://github.com/okaypadak/QualityAuthClient.git
+[submodule "quality-test"]
+	path = quality-test
+	url = https://github.com/okaypadak/QualityTest
