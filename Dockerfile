@@ -2,17 +2,25 @@ FROM maven:3.9.6-eclipse-temurin-17 as builder
 WORKDIR /app
 COPY . .
 
-# 1. Önce quality-auth-client’i local repo’ya kur
+# 🔍 Debug log
+RUN echo "📦 Maven kurulum başlıyor..." && \
+    echo "📁 /app içeriği:" && ls -la /app && \
+    echo "📁 /app/quality-auth-client:" && ls -la /app/quality-auth-client || true && \
+    echo "📁 /app/quality-test:" && ls -la /app/quality-test || true
+
+# 1. quality-auth-client kurulumu
 RUN mvn install -DskipTests \
-    -f quality-auth-client/pom.xml \
+    -f /app/quality-auth-client/pom.xml \
     -Dmaven.multiModuleProjectDirectory=/app
 
-# 2. Sonra quality-test’i derleyip target’e .jar çıkar
+# 2. quality-test derlemesi
 RUN mvn package -DskipTests \
-    -f quality-test/pom.xml \
+    -f /app/quality-test/pom.xml \
     -Dmaven.multiModuleProjectDirectory=/app
 
-# Final çalışma imajı
+# 💥 Debug: target içeriğini kontrol et
+RUN echo "🎯 quality-test/target içeriği:" && ls -la /app/quality-test/target || echo "❌ target dizini yok"
+
 FROM eclipse-temurin:17
 WORKDIR /app
 COPY --from=builder /app/quality-test/target/*.jar app.jar
