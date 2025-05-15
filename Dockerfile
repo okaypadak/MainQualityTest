@@ -2,7 +2,7 @@ FROM maven:3.9.6-eclipse-temurin-17 as builder
 WORKDIR /app
 COPY . .
 
-RUN mvn install -DskipTests -f quality-auth-client/pom.xml
+RUN mvn install -DskipTests -f /quality-auth-client/pom.xml
 
 FROM eclipse-temurin:17
 WORKDIR /app
