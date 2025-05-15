@@ -5,8 +5,8 @@ COPY . .
 # 🔍 Debug log
 RUN echo "📦 Maven kurulum başlıyor..." && \
     echo "📁 /app içeriği:" && ls -la /app && \
-    echo "📁 /app/quality-auth-client:" && ls -la /app/quality-auth-client || true && \
-    echo "📁 /app/quality-test:" && ls -la /app/quality-test || true
+    echo "📁 quality-auth-client:" && ls -la quality-auth-client || true && \
+    echo "📁 quality-test:" && ls -la quality-test || true
 
 # 1. quality-auth-client kurulumu
 RUN mvn install -DskipTests \
