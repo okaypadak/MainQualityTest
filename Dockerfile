@@ -2,6 +2,9 @@ FROM maven:3.9.6-eclipse-temurin-17 as builder
 WORKDIR /app
 COPY . .
 
+RUN git clone https://github.com/okaypadak/quality-auth-client.git && \
+    git clone https://github.com/okaypadak/quality-test.git
+
 # 🔍 Debug log
 RUN echo "📦 Maven kurulum başlıyor..." && \
     echo "📁 /app içeriği:" && ls -la /app && \
